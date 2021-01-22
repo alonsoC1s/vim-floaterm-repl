@@ -1,10 +1,10 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 filetype=$1
 filepath=$2
 shift
 shift
 params=$@
-echo "Start $filetype $filepath"
+echo "Running $filetype"
 echo "====================="
 echo ''
 case $filetype in
@@ -19,8 +19,8 @@ case $filetype in
   go )
       go run $filepath $params
     ;;
-  python | python3) 
-      python3 $filepath $params
+  python | python3)
+      python $filepath $params
     ;;
 
   *)
@@ -30,4 +30,3 @@ esac
 
 echo ''
 echo "====================="
-
