@@ -1,32 +1,38 @@
 #!/usr/bin/env zsh
 filetype=$1
 filepath=$2
+run_cmd=''
 shift
 shift
 params=$@
-echo "Running $filetype"
-echo "====================="
-echo ''
 case $filetype in
   javascript | js)
-     node $filepath $params
+     run_cmd="node"
     ;;
 
   bash | sh)
-     bash $filepath $params
+     run_cmd="bash"
     ;;
 
   go )
-      go run $filepath $params
+	filetype="${filetype}  "
+	run_cmd="go"
     ;;
   python | python3)
-      python $filepath $params
+	filetype="${filetype}  (conda: $CONDA_DEFAULT_ENV)"
+	run_cmd="python"
     ;;
 
   *)
     echo -n "unknown"
     ;;
 esac
+
+echo "Running $filetype"
+echo "==="
+echo ''
+
+$run_cmd $filepath $params
 
 echo ''
 echo "====================="
