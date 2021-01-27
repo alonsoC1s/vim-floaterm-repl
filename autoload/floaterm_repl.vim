@@ -29,15 +29,7 @@ function! floaterm_repl#run() range
             let w= system("echo " .shellescape(query)." > " .l:filepath )
         endif
     else
-        let [line_start, column_start] = getpos("'<")[1:2]
-        let [line_end, column_end] = getpos("'>")[1:2]
-        let lines = getline(line_start, line_end)
-        if len(lines) == 0
-            echo "You need select code."
-            return ''
-        endif
-        let l:filepath='/tmp/vim_floaterm.'.l:filetype
-        silent execute "\'<,\'>w! " . l:filepath
+		let l:filepath = expand('%:p')
     endif
 
     silent execute ':FloatermKill! repl'
